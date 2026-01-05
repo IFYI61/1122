@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>生日</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片高度調整範例</title>
+    <style>
+      .video-center {
+    display: block;
+    margin: 0 auto;
+}
+
+      :root{
+      --bg:#f4efec;
+      --card:#4f3b35; /* 深咖啡 */
+      --card-radius:12px;
+      --text-light:#fff;
+      --accent:#7f6a62;
+      --container-max:1100px;
+      --gap:28px;
+      font-family: "Noto Sans TC", "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* 裝飾背景（示範使用你上傳的圖片） */
+    .page-bg{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px 20px;
+      box-sizing:border-box;
+      overflow:hidden;
+    }
+    .page-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url('/mnt/data/0404462f-1c8b-4a69-afe8-dc3ecff70a8c.png');
+      background-repeat:no-repeat;
+      background-position:center top;
+      background-size:cover;
+      opacity:0.12;
+      pointer-events:none;
+      transform:translateY(-10%);
+      filter:blur(0.5px) saturate(.9);
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--container-max);
+      text-align:center;
+      z-index:1; /* 在背景之上 */
+    }
+
+    h1{
+      margin:0 0 18px 0;
+      font-size:28px;
+      color:#5b463f;
+      letter-spacing:1px;
+      font-weight:700;
+      text-shadow:0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    /* 卡片區域 */
+    .countdown-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:var(--gap);
+      align-items:center;
+    }
+
+    /* 單張卡片 */
+    .card{
+      background:var(--card);
+      color:var(--text-light);
+      padding:28px 18px;
+      border-radius:var(--card-radius);
+      box-shadow:0 6px 18px rgba(79,59,53,0.12);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height:120px;
+    }
+
+    .number{
+      font-size:56px;
+      line-height:1;
+      font-weight:700;
+      margin:0;
+      letter-spacing:1px;
+    }
+    .label{
+      margin-top:10px;
+      font-size:13px;
+      letter-spacing:2px;
+      opacity:0.95;
+      text-transform:uppercase;
+    }
+
+    /* 響應式：手機改成 2x2 */
+    @media (max-width:880px){
+      .countdown-row{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+      }
+      .number{ font-size:44px; }
+    }
+    @media (max-width:420px){
+      .number{ font-size:36px; }
+      .card{ padding:20px; }
+    }
+
+    /* 小提示文字 */
+    .sub{
+      margin-top:20px;
+      color:var(--accent);
+      font-size:14px;
+    }
+      
+        .hero-banner {
+            width: 100%;           /* 保持圖片寬度為 100% */
+            height: 85vh;          /* 設定高度為螢幕高度的 60% */
+            object-fit: cover;     /* 確保圖片按比例縮放並不會變形 */
+            display: block;        /* 讓圖片成為區塊元素 */
+        }
+        .menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+/* ================= 全域設定 ================= */
+* {
+  box-sizing: border-box;
+}
+
+
+
+/* ================= 外框 ================= */
+.memory-wrapper {
+  max-width: 1300px;
+  margin: auto;
+  padding: 80px 40px 120px;
+}
+
+/* 標題 */
+.page-title {
+  font-size: 32px;
+  color: #6a4b3b;
+  margin-bottom: 60px;
+}
+
+/* ================= 2 欄排版 ================= */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 70px 90px;
+}
+
+/* ================= 單一卡片 ================= */
+.memory-card {
+  position: relative;
+}
+
+/* 白色內容板 */
+.card-inner {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 42px 38px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+}
+
+/* ================= 文字 ================= */
+.text h2 {
+  font-size: 26px;
+  margin: 0 0 12px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+.text ul {
+  padding-left: 22px;
+  margin: 0;
+}
+
+.text li {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #a00000;
+  margin-bottom: 6px;
+}
+
+/* ================= 圖片漂浮 ================= */
+.image {
+  position: absolute;
+  top: 50%;
+  right: -70px;
+  transform: translateY(-50%);
+  width: 42%;
+  z-index: 3;
+}
+
+.image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 22px 38px rgba(0,0,0,0.28);
+}
+
+/* 左右傾斜 */
+.rotate-left img {
+  transform: rotate(-6deg);
+}
+
+.rotate-right img {
+  transform: rotate(6deg);
+}
+
+/* ================= RWD ================= */
+@media (max-width: 900px) {
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image {
+    position: static;
+    transform: none;
+    width: 80%;
+    margin: 20px auto 0;
+  }
+}
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: #dba9e6;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    position: fixed;   /* 固定在頁面最上方 */
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.marquee-text {
+    white-space: nowrap;
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+</style>
+</head>
+    <img src="images/010f40b7f070d3e3f7b8f2a4426ee2ac.jpg" class="hero-banner" alt="banner">
+  
+
+<body>
+  <div class="marquee">
+    <div class="marquee-text">
+        🕊️ ﾟ｡·* ✧˚.  ✧⊹⊱° 歡迎來到CHARLIE的生日網站｜最新消息：作品集已更新｜感謝您的瀏覽 യ˚*  ₊⊹   *ੈ✩‧₊   * 
+    </div>
+</div>
+
+<iframe
+    class="video-center"
+    src="https://player.bilibili.com/player.html?bvid=BV18g411Z7aQ"
+    width="1500"
+    height="900"
+    allowfullscreen="true">
+</iframe>
+      <!---------------- 小圖選單 ---------------->
+<div class="menu">
+  <img src="images/FPodSj8acAAQ_hu.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj9aIAU5oSc.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj8aAAYUxVv.png"height="200" alt="縮小圖片">
+    <img src="images/FPodSj8acAAQ_hu.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj9aIAU5oSc.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj8aAAYUxVv.png"height="200" alt="縮小圖片">
+    <img src="images/FPodSj8acAAQ_hu.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj9aIAU5oSc.png"height="200" alt="縮小圖片">
+  <img src="images/FPodSj8aAAYUxVv.png"height="200" alt="縮小圖片">
+</div>
+
+  <div class="page-bg">
+    <div class="container" role="region" aria-label="生日倒數區">
+      <h1>距離查理蘇生日僅剩：</h1>
+
+      <div class="countdown-row" id="countdown">
+        <div class="card" aria-live="polite">
+          <div class="number" id="days">--</div>
+          <div class="label">DAY</div>
+        </div>
+
+        <div class="card" aria-live="polite">
+          <div class="number" id="hours">--</div>
+          <div class="label">H</div>
+        </div>
+
+        <div class="card" aria-live="polite">
+          <div class="number" id="minutes">--</div>
+          <div class="label">MIN</div>
+        </div>
+
+        <div class="card" aria-live="polite">
+          <div class="number" id="seconds">--</div>
+          <div class="label">S</div>
+        </div>
+      </div>
+
+      <div class="sub">目標日期：<span id="targetStr">尚未設定</span></div>
+    </div>
+  </div>
+
+    
+  
+  <script>
+    // ======= 只要改這行就能設定要倒數的目標生日（使用 ISO 格式或可被 Date 解析的字串） =======
+    // 範例：設定成 2026-03-01 00:00:00（請依需求修改）
+    const targetDate = new Date('2026-07-24T00:00:00'); // <- 修改此處
+
+    // 顯示在頁面上的目標字串（方便檢查）
+    document.getElementById('targetStr').textContent = targetDate.toLocaleString();
+
+    // DOM 元素
+    const elDays = document.getElementById('days');
+    const elHours = document.getElementById('hours');
+    const elMinutes = document.getElementById('minutes');
+    const elSeconds = document.getElementById('seconds');
+
+    // 換算常數（逐位運算說明）
+    const MS_PER_SEC = 1000;                // 1 秒 = 1000 毫秒
+    const SEC_PER_MIN = 60;                 // 1 分鐘 = 60 秒
+    const MIN_PER_HOUR = 60;                // 1 小時 = 60 分鐘
+    const HOUR_PER_DAY = 24;                // 1 天 = 24 小時
+
+    const MS_PER_MIN = MS_PER_SEC * SEC_PER_MIN;             // 60000 ms
+    const MS_PER_HOUR = MS_PER_MIN * MIN_PER_HOUR;           // 3600000 ms
+    const MS_PER_DAY = MS_PER_HOUR * HOUR_PER_DAY;           // 86400000 ms
+
+    function updateCountdown(){
+      const now = new Date();
+
+      // 計算剩餘毫秒（target - now）
+      let diff = targetDate - now;
+
+      // 如果已經過了目標，將差設為 0（不顯示負數）
+      if (diff <= 0) {
+        diff = 0;
+        clearInterval(timer); // 可停止 interval（已到期）
+      }
+
+      // 現在開始逐步把毫秒換算成天/時/分/秒（逐步減去已計算出的單位）
+      // 1) 天數 = floor(diff / MS_PER_DAY)
+      const days = Math.floor(diff / MS_PER_DAY);
+      diff = diff - (days * MS_PER_DAY);
+
+      // 2) 小時 = floor(diff / MS_PER_HOUR)
+      const hours = Math.floor(diff / MS_PER_HOUR);
+      diff = diff - (hours * MS_PER_HOUR);
+
+      // 3) 分鐘 = floor(diff / MS_PER_MIN)
+      const minutes = Math.floor(diff / MS_PER_MIN);
+      diff = diff - (minutes * MS_PER_MIN);
+
+      // 4) 秒 = floor(diff / MS_PER_SEC)
+      const seconds = Math.floor(diff / MS_PER_SEC);
+
+      // 將數字填到 DOM（補零到兩位顯示較一致）
+      elDays.textContent = String(days);
+      elHours.textContent = String(hours).padStart(2, '0');
+      elMinutes.textContent = String(minutes).padStart(2, '0');
+      elSeconds.textContent = String(seconds).padStart(2, '0');
+    }
+
+    // 先執行一次，然後每秒更新
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+  <section class="memory-wrapper">
+
+  <h1 class="page-title">心動記憶</h1>
+
+  <div class="memory-grid">
+
+    <!-- 卡片 2021 -->
+    <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>仲夏鎏金</h2>
+          <p class="desc">和'家人'一起過生日，確實比我想的要更有趣</p>
+          <ul>
+            <li>似乎觸碰到了查理蘇的另一面。</li>
+            <li>好像距离真實的查理蘇又近了一点。</li>
+            <li>下次要多學幾個醒酒穴位。</li>
+            <li>避開人群單獨散步也不错。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-left">
+        <a href="https://www.bilibili.com/video/BV18f4y1j7mx/?spm_id_from=333.1387.search.video_card.click&vd_source=5893ebd75c380dbba7b23a4609637bf5">
+  <img src="https://patchwiki.biligame.com/images/qqlove/thumb/0/05/f41ezliqmc7fi5mofkr71ab4bj5gy96.png/250px-%E4%BB%B2%E5%A4%8F%E9%8E%8F%E9%87%91%C2%B7%E4%B8%80%E6%AE%B5%E5%85%89%E5%BD%B1.png" >
+</a>
+      </div>
+    </div>
+
+    <!-- 卡片 2022 -->
+    <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>致神諭</h2>
+          <p class="desc">我向太陽神'拉'致以敬意，確認我的愛慕為真</p>
+          <ul>
+            <li>如果不是查理叉的鱼，我才不會吃这么多。</li>
+            <li>後來玩得太盡興，我的眼镜都弄濕了。</li>
+            <li>多虧了查理蘇的鼓勵，我才看到這美景。</li>
+            <li>我暗暗祈禱還能和他一起仰望星空。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-right">
+        <a href="https://www.bilibili.com/video/BV1sG411p7C8/?spm_id_from=333.1387.search.video_card.click&vd_source=5893ebd75c380dbba7b23a4609637bf5">
+  <img src="https://patchwiki.biligame.com/images/qqlove/thumb/f/f0/1v1nkxnqln8ix4mw49htrf9woo81jtj.png/250px-%E8%87%B4%E7%A5%9E%E8%B0%95%C2%B7%E4%B8%80%E6%AE%B5%E5%85%89%E5%BD%B1.png.jpeg" >
+</a>
+      </div>
+    </div>
+
+    <!-- 卡片 2023 -->
+ <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>聖痕之下</h2>
+          <p class="desc">飛越時間的邊際，直至比遙遠更遠。</p>
+          <ul>
+            <li>從此以后，他是我最信賴的同盟。</li>
+            <li>忘卻的過去令我心悸。</li>
+            <li>但身邊的人讓我安心。</li>
+            <li>我們會攜手向前。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-left">
+        <a href="bilibili.com/video/BV1Wu411L7Lq/?spm_id_from=333.1387.search.video_card.click">
+  <img src="https://patchwiki.biligame.com/images/qqlove/thumb/2/24/fmc4z0we9evezzsxutgv6waurpv28er.png/250px-%E5%9C%A3%E7%97%95%E4%B9%8B%E4%B8%8B%C2%B7%E4%B8%80%E6%AE%B5%E5%85%89%E5%BD%B1.png.jpeg">
+</a>
+      </div>
+    </div>
+
+    <!-- 卡片 2024 -->
+    <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>醉夢金鄉</h2>
+          <p class="desc">屏住呼吸，擲出骰子，啟程吧，跳動的棋子，</p>願你在這場大的追逐戰站中好運加身。</p>
+          <ul>
+            <li>從此以後，他將是我最信賴的同盟。</li>
+            <li>身邊的人，卻能讓我如此安心。</li>
+            <li>花香縈繞，我們會並肩向前。</li>
+            <li>即使人潮擁擠，我們也能找到彼此。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-right">
+        <a href="https://www.bilibili.com/video/BV1Hi421h7iX/?spm_id_from=333.1387.search.video_card.click">
+  <img src="https://img1.ali213.net/shouyou/upload/image/2024/07/24/584_20240724104835477.jpg" >
+</a>
+      </div>
+    </div>
+
+ <!-- 卡片 2025 -->
+    <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>傾奏彌想</h2>
+          <p class="desc">任憑晨昏輪轉，我們都會形影相隨，宣告彼此是愛的唯一。</p>
+          <ul>
+            <li>查理蘇，你的名字早已刻在我心底。</li>
+            <li>没有什麼能比得上這甜蜜的輪迴。</li>
+            <li>幸福在此刻定格。</li>
+            <li>我們命中注定。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-right">
+        <a href="https://www.bilibili.com/video/BV1rounzTEi4/?spm_id_from=333.1387.search.video_card.click&vd_source=5893ebd75c380dbba7b23a4609637bf5">
+        <img src="https://img2.baidu.com/it/u=2645951985,1107871124&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=704"></a>
+      </div>
+    </div>
+
+ <!-- 卡片 2026 -->
+    <div class="memory-card">
+      <div class="card-inner">
+        <div class="text">
+          <h2>2026待續</h2>
+          <p class="desc">自驾游被突如其来的抛锚打断，却带来新的发现…</p>
+          <ul>
+            <li>陆沉，你的名字早已刻在我心底。</li>
+            <li>没有什么能比得上这甜蜜的轮回。</li>
+            <li>幸福在此刻定格。</li>
+            <li>我们命中注定。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="image rotate-right">
+     <a href="https://love.qq.com/main.html">
+        <img src="https://img1.baidu.com/it/u=2627558937,3219109684&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500"></a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
